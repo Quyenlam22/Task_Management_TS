@@ -59,3 +59,19 @@ export const detail = async (req: Request, res: Response) => {
     });
 }
 
+//[PATCH] api/v1/tasks/change-status/:id
+export const changeStatus = async (req: Request, res: Response) => {
+    const id: string = req.params.id;
+
+    await Task.updateOne({
+        _id: id
+    }, {
+        status: req.body.status
+    });
+
+    res.json({
+        code: "200",
+        message: "Success!"
+    });
+}
+
