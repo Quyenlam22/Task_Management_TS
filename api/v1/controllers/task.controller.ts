@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import Task from "../models/task.model";
 import paginationHelper from "../helpers/pagination";
 import searchHelper from "../helpers/search";
-import { StringExpression } from "mongoose";
 
 //[GET] api/v1/tasks
 export const index = async (req: Request, res: Response) => {
