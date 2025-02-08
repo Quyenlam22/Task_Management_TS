@@ -41,3 +41,42 @@ export const register = async (req: Request, res: Response) => {
         });
     }
 }
+
+//[POST] api/v1/users/login
+export const login = async (req: Request, res: Response) => {
+    try {
+        const user = await User.findOne({
+            email: req.body.email,
+            deleted: false
+        })
+    
+        if(!user) {
+            res.json({
+                code: 400,
+                message: "Not found account!"
+            })
+        }
+        else{
+            req.body.password = md5(req.body.password)
+    
+            if(user.password !== req.body.password){
+                res.json({
+                    code: 400,
+                    message: "Error password!"
+                })
+                return
+            }
+    
+            res.json({
+                code: 200,
+                message: "Success!",
+                token: user.token
+            }) 
+        }
+    } catch (error) {
+        res.json({
+            code: "400",
+            message: "Error!"
+        });
+    }
+}
