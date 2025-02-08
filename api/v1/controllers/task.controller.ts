@@ -142,3 +142,21 @@ export const changeMulti = async (req: Request, res: Response) => {
     }
 }
 
+//[POST] api/v1/tasks/create
+export const create = async (req: Request, res: Response) => {
+    try {
+        const task = new Task(req.body);
+        await task.save();
+
+        res.json({
+            code: "200",
+            message: "Success!",
+            task: task
+        });
+    } catch (error) {
+        res.json({
+            code: "400",
+            message: "Error!"
+        });
+    }
+}
