@@ -160,3 +160,45 @@ export const create = async (req: Request, res: Response) => {
         });
     }
 }
+
+//[PATCH] api/v1/tasks/edit/:id
+export const edit = async (req: Request, res: Response) => {
+    try {
+        await Task.updateOne({
+            _id: req.params.id
+        }, req.body);
+
+        res.json({
+            code: "200",
+            message: "Success!"
+        });
+    } catch (error) {
+        res.json({
+            code: "400",
+            message: "Error!"
+        });
+    }
+}
+
+//[PATCH] api/v1/tasks/delete/:id
+export const deleteTask = async (req: Request, res: Response) => {
+    try {
+        await Task.updateOne({
+            _id: req.params.id
+        }, {
+            deleted: true,
+            deletedAt: new Date()
+        });
+
+        res.json({
+            code: "200",
+            message: "Success!"
+        });
+    } catch (error) {
+        res.json({
+            code: "400",
+            message: "Error!"
+        });
+    }
+}
+
