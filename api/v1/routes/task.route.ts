@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as controller from "../controllers/task.controller";
+import * as validate from "../validates/task.validate";
 const router: Router = Router();
 
 router.get("/", controller.index);
@@ -10,9 +11,9 @@ router.patch("/change-status/:id", controller.changeStatus);
 
 router.patch("/change-multi", controller.changeMulti);
 
-router.post("/create", controller.create);
+router.post("/create", validate.create, controller.create);
 
-router.patch("/edit/:id", controller.edit);
+router.patch("/edit/:id", validate.edit, controller.edit);
 
 router.delete("/delete/:id", controller.deleteTask);
 
