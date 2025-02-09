@@ -81,19 +81,13 @@ export const login = async (req: Request, res: Response) => {
     }
 }
 
-//[GET] api/v1/users/detail/:id
+//[GET] api/v1/users/detail
 export const detail = async (req: Request, res: Response) => {
-    try {
-        const id: string = req.params.id
-        const user = await User.findOne({
-            _id: id,
-            deleted: false
-        }).select("-password -token");
-            
+    try {   
         res.json({
             code: 200,
             message: "Success!",
-            info: user
+            info: req["user"]
         }) 
     } catch (error) {
         res.json({
